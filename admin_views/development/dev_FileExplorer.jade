@@ -1,0 +1,37 @@
+.table-responsive#folder_tablediv
+    table#datatable_folder.table.table-striped
+        thead.bg-warning.bg-lighten-5
+            tr
+                each column, k in folder_Tableheaders
+                        th !{column}
+
+        //tfoot
+            tr
+                th
+                each column, k in folder_Tableheaders
+                        th !{column}                               
+        tbody
+            each row, i in folder_tableRows
+                tr
+                    each column, k in row
+                        td
+                                if column.buttons
+                                        each button in column.buttons
+                                            if button.container == 'new-page'
+                                                - var url = 'goToLinkInNewWindow("' + button.url  + '","' + button.name + '")'
+                                                +Button(url,button.name,button.color,button.icon)
+                                            else
+                                                if button.askconfirm
+                                                    - var url = 'executeModalQueryConfirm("' + button.url  + '","' + button.name + '","' + button.container + '","' + doafter +  '")'
+                                                else
+                                                    - var url = 'executeModalQuery("' + button.url  + '","' + button.name + '","' + button.container + '")'
+                                                +Button(url,button.name,button.color,button.icon)
+                                else
+                                    !{column}
+    //script.
+        $('#datatable_folder').DataTable({
+            "pageLength" : 10,
+            "autoWidth": true
+        });
+
+

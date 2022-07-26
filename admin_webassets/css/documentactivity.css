@@ -1,0 +1,142 @@
+.activitytable {
+    width: 100%;
+    background-color: #FFFFFF;
+}
+
+.activitytable td {
+
+}
+
+.activitytable #thactivitydate {
+    font-family: "Verdana";
+    font-weight: bold;
+    font-size: 0.8em;
+    text-align: left;
+    padding: 0.3em;
+    background-color: #ccc;
+    color: #000000;    
+    white-space: nowrap;
+}
+
+.activitytable #thduration {
+    font-family: "Verdana";
+    font-weight: bold;
+    font-size: 0.8em;
+    text-align: left;
+    padding: 0.3em;
+    background-color: #ccc;
+    color: #000000;    
+    white-space: nowrap;
+}
+
+.activitytable #thdurationpercent {
+    font-family: "Verdana";
+    font-weight: bold;
+    font-size: 0.8em;
+    text-align: left;
+    padding: 0.3em;
+    background-color: #ccc;
+    color: #000000;    
+    white-space: nowrap;
+}
+
+.activitytable #thframes {
+    font-family: "Verdana";
+    font-weight: bold;
+    font-size: 0.8em;
+    text-align: left;
+    padding: 0.3em;
+    background-color: #ccc;
+    color: #000000;    
+    white-space: nowrap;
+}
+
+.activitytable #thtitle {
+    font-family: "Verdana";
+    font-weight: bold;
+    font-size: 0.8em;
+    text-align: left;
+    padding: 0.3em;
+    background-color: #ccc;
+    color: #000000;   
+}
+
+.activitytable #thexe {
+    font-family: "Verdana";
+    font-weight: bold;
+    font-size: 0.8em;
+    text-align: left;
+    padding: 0.3em;
+    background-color: #ccc;
+    color: #000000;    
+    white-space: nowrap;
+}
+
+.activitytable #thexepath {
+    font-family: "Verdana";
+    font-weight: bold;
+    font-size: 0.8em;
+    text-align: left;
+    padding: 0.3em;
+    background-color: #ccc;
+    width: 100%;
+    color: #000000;    
+}
+
+.activitytable #activitydate {
+    font-family: "Verdana";
+    font-size: 0.7em;
+    text-align: center;
+    padding: 0.3em;
+    width: 1%;
+    white-space: nowrap;
+}
+
+.activitytable #duration {
+    font-family: "Verdana";
+    font-size: 0.7em;
+    text-align: center;
+    padding: 0.3em;
+    width: 1%;
+    white-space: nowrap;
+}
+
+.activitytable #frames {
+    font-family: "Verdana";
+    font-size: 0.7em;
+    text-align: center;
+    padding: 0.3em;
+    width: 1%;
+    white-space: nowrap;
+}
+
+.activitytable #title {
+    font-family: "Verdana";
+    font-size: 0.7em;
+    text-align: left;
+    padding: 0.3em;
+    word-break: break-all;
+    width: 40%;
+}
+
+.activitytable #exe {
+    font-family: "Verdana";
+    font-size: 0.7em;
+    text-align: left;
+    padding: 0.3em;
+    text-align: center;
+    word-break: normal;
+}
+
+.activitytable #exepath {
+    font-family: "Verdana";
+    font-size: 0.7em;
+    text-align: left;
+    padding: 0.3em;
+    word-break: break-all;
+    width: 40%;    
+ }
+
+.activitytable tr:nth-child(even) {
+    background-color: #eee;
+}

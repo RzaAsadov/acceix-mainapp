@@ -1,0 +1,82 @@
+#headertable {
+    background-color: #000000;
+    width: 100%;
+}
+
+#headertable #headertd {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;   
+    padding-left: 0.4em;
+    font-family: "Verdana";
+    font-size: 1em;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #000000;
+    width: 100%; 
+}
+
+#headertable #logouttd {
+    background-color: #000000;
+    color: #FFFFFF;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;   
+    padding-right: 0.4em;
+    font-family: "Verdana";
+    font-size: 0.8em;
+    font-weight: bold;
+    cursor: pointer;
+    width: 1%;
+    white-space: nowrap;
+}
+
+#headertable #usernametd {
+    background-color: #000000;
+    color: #ffbd03;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;   
+    padding-right: 0.4em;
+    font-family: "Verdana";
+    font-size: 0.8em;
+    font-weight: bold;
+    width: 1%;
+    white-space: nowrap;
+}
+
+#headertable #changepasswordtd {
+    background-color: #000000;
+    color: #00a2e2;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;   
+    padding-right: 1em;
+    font-family: "Verdana";
+    font-size: 0.8em;
+    font-weight: bold;
+    width: 1%;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+#headertable #licensetd {
+    background-color: #000000;
+    color: #cddc39;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;   
+    padding-right: 1em;
+    font-family: "Verdana";
+    font-size: 0.8em;
+    font-weight: bold;
+    width: 1%;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+#logoutlink {
+    background-color: #f44336;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+

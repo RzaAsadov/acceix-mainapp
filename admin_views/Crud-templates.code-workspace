@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+
+		/*"triggerTaskOnSave.tasks": {
+			"sync to dev1": [
+				"*.*",
+			]
+		},*/
+		"java.completion.enabled": false,
+		"java.debug.settings.enableRunDebugCodeLens": false
+
+	}
+}

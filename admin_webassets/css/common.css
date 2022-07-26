@@ -1,0 +1,144 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 12, 2017, 9:55:29 PM
+    Author     : Rza Asadov <rza.asadov at gmail.com>
+*/
+
+
+.toppadding05 {
+    padding-top: 0.5em;
+}
+
+.leftpadding05 {
+    padding-left: 0.5em;
+}
+
+.autopadding {
+    padding: auto;
+}
+
+.padding1 {
+    padding: 1em;
+}
+
+.padding05 {
+    padding: 0.5em;
+}
+
+.padding07 {
+    padding: 0.7em;
+}
+
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.wrap {
+    word-wrap: break-word;
+}
+
+.vcenter {
+    vertical-align: middle;
+}
+
+.vtop {
+    vertical-align: top;
+}
+
+vbottom {
+    vertical-align: bottom;
+}
+
+.hcenter {
+    text-align: center;
+}
+
+.hleft {
+    text-align: left;
+}
+
+.hright {
+    text-align: right;
+}
+
+.maxwidth{
+  width: 100%;
+}
+
+.minwidth {
+   width: 1%;
+}
+
+.maxheight {
+    height: 100%;
+}
+
+.minheight {
+    height: 1%;
+}
+
+.autowidth {
+    width: auto !important;
+    display: inline-block;
+    
+}
+
+.text-1 {
+    font-family: Verdana;
+    font-size: 1em;
+}
+
+.text-08 {
+    font-family: Verdana;
+    font-size: 0.7em;
+}
+
+.text-07 {
+    font-family: Verdana;
+    font-size: 0.7em;
+}
+
+.text-05 {
+    font-family: Verdana;
+    font-size: 0.5em;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.posleft {
+    position: relative;
+    right: 0;    
+}
+
+.posright {
+    position: relative;
+    left: 0;    
+}
+
+
+.pointer {
+    cursor: pointer;
+}
+
+.background-gray {
+    background-color: #e0e0e0;
+}
+
+.inline {
+    display: inline;
+}
+
+.border1 {
+    border: 1px solid;
+}
+
+.color-black {
+    color: #000;
+}

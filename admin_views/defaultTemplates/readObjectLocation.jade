@@ -1,0 +1,70 @@
+style.
+      /* Set the size of the div element that contains the map */
+      #map {
+      height: 400px;  /* The height is 400 pixels */
+      width: 100%;  /* The width is the width of the web page */
+      }
+script.
+        var my_files = {};
+include ../scripts/upload.jade
+include ../components/InputElements.jade
+.row
+  .col-xs-12
+    .card
+      if result == "error"
+        .card-header
+          h4.card-title Access denied , contact your administrator !
+      else 
+        .card-header
+          h4.card-title #{pagetitle}
+          a.heading-elements-toggle
+            i.fa.fa-ellipsis-v.font-medium-3
+
+        .card-body.collapse.in
+            form(id="dataform", name="dataform").form
+              .row
+                div#map
+              .row
+                .col-md-12
+                    +Input(address)
+                    +Input(latitute)
+                    +Input(longitute)
+              .row
+                .col-md-6
+                    +Input(cities)
+                .col-md-6
+                    +Input(countries)
+              .row
+                .col-md-3
+                    +Input(area)
+                .col-md-9
+                    +Input(full_address)
+          .card-block.card-dashboard
+
+script.
+
+    $('.selectpicker').selectpicker({
+        
+    });
+
+    $('.dates').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minYear: 1901,
+        maxYear: parseInt(moment().format('YYYY'),10),
+        buttonClasses: "btn btn-md",
+        locale: {
+                        format: 'DD/MM/YYYY'
+                }        
+    });  
+
+
+        
+                    if (typeof google === 'object' && typeof google.maps === 'object') {
+                            initMap('#{mapfield.defaultcity}','#{mapfield.defaultcountry}');      
+                    } else { 
+                        $.getScript('https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCAmVv8S0uCLOuQE79PNGtC3eo5iuWpiKQ', function() {
+                            initMap('#{mapfield.defaultcity}','#{mapfield.defaultcountry}');
+                        });
+                    } 
+  

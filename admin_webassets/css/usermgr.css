@@ -1,0 +1,128 @@
+
+.usermanagertable-userblock {
+    width: 100%;
+    border: 5px;
+    border-collapse: separate;
+    background-color: #ccc;
+}
+
+
+.usermanagertable-userblock td {
+    font-family: "Verdana";
+    font-size: 0.8em;
+    text-align: center;
+    border-color: #FFFFFF;
+    background-color: #f2f2f2;
+    
+}
+
+.usermanagertable-userblock th {
+    text-align: center;
+    background-color: #28a4c9;
+    color: white;  
+    font-family: "Verdana";
+    font-size: 0.8em;
+    border: 3px;
+   
+}
+
+.usermanagertable-userblock .desc {
+    text-align: center;
+    width: 40%;
+    padding-left: 0.4em;    
+}
+
+.usermanagertable-userblock .td-del {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.usermanagertable-userblock .td-edit {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.usermanagertable-groupblock {
+    width: 100%;
+    border: 5px;
+    border-collapse: separate;
+    background-color: #ccc;
+}
+
+
+.usermanagertable-groupblock td {
+    font-family: "Verdana";
+    font-size: 0.8em;
+    text-align: center;
+    width: 40%;
+    background-color: #f2f2f2;    
+}
+
+.usermanagertable-groupblock th {
+    text-align: center;
+    background-color: #28a4c9;
+    color: white;  
+    font-family: "Verdana";
+    font-size: 0.8em;
+   
+}
+
+.usermanagertable-groupblock .desc {
+    text-align: center;
+    width: 60%;
+    padding-left: 0.4em;    
+}
+
+.usermanagertable-groupblock .td-del {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.usermanagertable-groupblock .td-edit {
+    width: 1%;
+    white-space: nowrap;
+}
+
+
+
+
+.usermanagertable-rolesetblock {
+    width: 100%;
+    border: 5px;
+    border-collapse: separate;
+    background-color: #ccc;
+}
+
+.usermanagertable-rolesetblock td {
+    font-family: "Verdana";
+    font-size: 0.8em;
+    text-align: center;
+    width: 40%;
+    background-color: #f2f2f2;    
+}
+
+.usermanagertable-rolesetblock th {
+    text-align: center;
+    background-color: #28a4c9;
+    color: white;  
+    font-family: "Verdana";
+    font-size: 0.8em;
+   
+}
+
+.usermanagertable-rolesetblock .desc {
+    text-align: center;
+    width: 60%;
+    padding-left: 0.4em;
+}
+
+.usermanagertable-rolesetblock .td-del {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.usermanagertable-rolesetblock .td-edit {
+    width: 1%;
+    white-space: nowrap;
+}
+

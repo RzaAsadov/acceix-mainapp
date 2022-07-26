@@ -1,0 +1,36 @@
+html.loading(lang='en', data-textdirection='ltr')
+  head
+        title Netondo license system  
+        include headers.jade
+        script(src='scripts/licensepage.js')
+        link(rel='stylesheet', href='css/licensepage.css')
+  body
+    include modal.jade
+    div
+        table#headertable
+          tr
+            td#headertd Netondo license system
+    div#bodydiv
+        table#bodytable
+          tr
+            td(colspan='2')  
+          tr
+            td#bodytablestepword Step 2 of 2
+            td#bodytablecaption License setup 
+          tr
+            td(colspan='2')  
+          tr
+            td#settingblock(colspan='2')
+              table#maintable
+                tr
+                  th#captiontext Please enter license information data
+          tr
+            td
+              textarea#licensekey(style='white-space: pre-wrap;', rows='10', cols='60', wrap='hard')
+          tr
+            td
+              input#info_button(type='button', onclick="executeModalQuery('/monitor/engine?licensekey=:' + document.getElementById('licensekey').value);", value='Check license information')
+        tr
+          td#nextbutton(colspan='2')
+            input#gotonextstep(type='button', onclick="window.open('/monitor/engine?licensekey=' + document.getElementById('licensekey').value,'_self');", value=' Finish ')
+

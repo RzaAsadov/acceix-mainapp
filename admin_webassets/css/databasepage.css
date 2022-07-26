@@ -1,0 +1,177 @@
+body {
+    overflow: hidden;
+}
+
+#bodydiv {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: #000000;
+    background-color: #ddd;
+    overflow: hidden;
+    position: fixed;
+}
+
+#bodytable {
+    width: 1%;
+    white-space: nowrap;
+    margin: 0 auto;    
+    text-align: center;
+}
+
+#bodytable #settingblock {
+    text-align: center;
+}
+
+
+
+#bodytable #bodytablecaption {
+    text-align: left;
+    font-family: "Verdana";
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #5cb85c;
+    color: #ffffff;
+    width: 100%;
+    padding: 0.4em;
+}
+
+#bodytable #bodytablestepword {
+    text-align: center;
+    font-family: "Verdana";
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #d2be0e;
+    color: #ffffff;
+    width: 1%;
+    white-space: nowrap;
+    padding: 0.4em;    
+}
+
+#bodytable #nextbutton {
+    text-align: right;
+    font-family: "Verdana";
+    font-size: 1.2em;
+    font-weight: bold;
+    width: 100%;
+    white-space: nowrap;
+    padding-top: 0.4em;  
+    padding-bottom: 0.4em;      
+    padding-right: 0.2em;
+}
+
+#maintable {
+    width: 1%;
+    white-space: nowrap;   
+    padding: 2em;
+}
+
+#maintable #captiontext {
+    background-color: #5cb85c;
+    color: #FFFFFF;
+    width: 1%;
+    white-space: nowrap;
+    text-align: left;
+}
+
+#maintable #savebutton {
+    text-align: center;
+}
+
+#fileexplorermaintable {
+    width: 100%;
+    height: 80%;
+    white-space: nowrap;
+}
+
+#fileexplorermaintable #choosedirectorycaption {
+    text-align: left;
+    padding: 0.3em;
+    height: 1%;
+    background-color: #ddd;
+}
+
+#fileexplorermaintable #backbuttontd {
+    width: 1%;
+    height: 1%;
+    white-space: nowrap;
+    text-align: left;
+    background-color: #d2be0e;
+    border: 1px #b4aa50 solid;
+    cursor: pointer;
+    padding: 0.5em;   
+    font-family: "Verdana";
+    font-size: 0.8em;
+    font-weight: bold;    
+}
+
+
+#fileexplorermaintable #setdir {
+    text-align: left;
+    padding: 0.5em;
+    width: 1%;
+    height: 1%;
+    white-space: nowrap;
+    background-color: #5cb85c;
+    border: 1px #009900 solid;
+    cursor: pointer;
+    font-family: "Verdana";
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+#fileexplorermaintable #currentdir {
+    font-family: "Verdana";
+    font-size: 1.1em;
+    background-color: #ffbd03;
+    width: 100%;
+    white-space: nowrap;
+    color: #000000;
+    text-align: left;
+}
+
+#fileexplorermaintable #folderlistbody {
+    width: 100%;
+    height: 100%;
+    white-space: nowrap;
+    font-family: "Verdana";
+    font-size: 0.8em;
+    font-weight: bold;   
+    vertical-align: text-top;
+
+}
+
+#fileexplorerfilelistdiv {
+    width: 100%;
+    height: 500px;
+    overflow: auto;   
+}
+
+
+#fileexplorerfilelist {
+    width: 100%;
+    height: 1%;
+    white-space: nowrap;
+
+}
+
+#fileexplorerfilelist #directorybuttontd {
+    text-align: left;
+    padding: 0.3em;
+    font-family: "Verdana";
+    font-size: 1em;
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+    
+#fileexplorerfilelist #directorybuttontd:hover {
+    background-color: yellow;
+}
+
+#fileexplorerfilelist .disknames {
+    width: 100%;
+    height: 1%;
+}
+
+

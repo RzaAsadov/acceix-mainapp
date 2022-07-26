@@ -1,0 +1,30 @@
+include ../components/InputElements.jade
+
+.row
+  .col-xs-12
+    .card
+      if result == "error"
+        .card-header
+          h4.card-title Access denied , contact your administrator !
+      else 
+        .card-header
+          h4.card-title #{pagetitle}
+          a.heading-elements-toggle
+            i.fa.fa-ellipsis-v.font-medium-3
+
+        .card-body.collapse.in
+              .row
+                .col-md-12
+                  if creatable
+                    include updateListObjectData.jade
+
+              if filters
+                .row
+                  .col-md-12.text-md-right
+                      each row, i in filters
+                          .btn.btn-sm.btn-secondary.round.mr-1 #{row.value} 
+                            .tag.tag-warning.tag-pill.round #{row.name} 
+          .card-block.card-dashboard
+
+            if containstable
+              include ../components/listTable.jade

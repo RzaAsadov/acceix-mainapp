@@ -1,0 +1,77 @@
+if editmode=="objects"
+      .row
+        .col-md-4
+          .btn-group(role="group")
+            button#savebutton.btn.btn-md.btn-success(style="margin: 5px;" onClick="saveObjectCode(editor,'#{name}');") 
+              i(class="fa fa-check-square-o")
+              |  Save
+            button#runbutton.btn.btn-md.btn-primary(style="margin: 5px;" onClick="executeModalQuery('module=crud&action=read&obj=#{name}','#{name}','modal-xl')") 
+              i(class="fa fa-play-circle-o")
+              |  View              
+        .col-md-8
+else if editmode=="functions"
+      .row
+        .col-md-4
+          .btn-group(role="group")
+            button#savebutton.btn.btn-md.btn-success(style="margin: 5px;" onClick="saveFunctionCode(editor,'#{name}');") 
+              i(class="fa fa-check-square-o")
+              |  Save
+            button#runbutton.btn.btn-md.btn-primary(style="margin: 5px;" onClick="executeModalQuery('module=crud&action=getfunctionrunmodel&functionname=#{name}','#{name}','modal-md')") 
+              i(class="fa fa-play-circle-o")
+              |  Run
+else if editmode=="dbstored"
+      .row
+        .col-md-4
+          .btn-group(role="group")
+            button#savebutton.btn.btn-md.btn-success(style="margin: 5px;" onClick="saveDbstoredCode(editor,'#{name}');") 
+              i(class="fa fa-check-square-o")
+              |  Save
+            button#runbutton.btn.btn-md.btn-primary(style="margin: 5px;" onClick="executeModalQuery('module=crud&action=getdbstoredrunmodel&dbstoredname=#{name}','#{name}','modal-xs')") 
+              i(class="fa fa-play-circle-o")
+              |  Run in database 
+else if editmode=="scripts"
+      .row
+        .col-md-4
+          .btn-group(role="group")
+            button#savebutton.btn.btn-md.btn-success(style="margin: 5px;" onClick="saveScriptCode(editor,'#{name}');") 
+              i(class="fa fa-check-square-o")
+              |  Save
+            button#runbutton.btn.btn-md.btn-primary(style="margin: 5px;" onClick="executeModalQuery('module=crud&action=getscriptrunmodel&dbstoredname=#{name}','#{name}','modal-xs')") 
+              i(class="fa fa-play-circle-o")
+              |  Run in terminal
+else if editmode=="admin_views"
+      .row
+        .col-md-4
+          .btn-group(role="group")
+            button#savebutton.btn.btn-md.btn-success(style="margin: 5px;" onClick="saveAdminViewsCode(editor,'#{name}');") 
+              i(class="fa fa-check-square-o")
+              |  Save
+            button#jadebutton.btn.btn-md.btn-warning(style="margin: 5px;" onClick="convertToJade(editor,editor);") 
+              i(class="fa fa-exchange")
+              |  CONVERT TO JADE         
+
+else if editmode=="custom_views"
+      .row
+        .col-md-4
+          .btn-group(role="group")
+            button#savebutton.btn.btn-md.btn-success(style="margin: 5px;" onClick="saveCustomViewsCode(editor,'#{name}');") 
+              i(class="fa fa-check-square-o")
+              |  Save
+            button#jadebutton.btn.btn-md.btn-warning(style="margin: 5px;" onClick="convertToJade(editor,editor);") 
+              i(class="fa fa-exchange")
+              |  CONVERT TO JADE
+
+else if editmode=="custom_web_assets"
+      .row
+        .col-md-4
+          .btn-group(role="group")
+            button#savebutton.btn.btn-md.btn-success(style="margin: 5px;" onClick="saveCustomWebAssetsCode(editor,'#{name}');") 
+              i(class="fa fa-check-square-o")
+              |  Save 
+else if editmode=="admin_web_assets"
+      .row
+        .col-md-4
+          .btn-group(role="group")
+            button#savebutton.btn.btn-md.btn-success(style="margin: 5px;" onClick="saveAdminWebAssetsCode(editor,'#{name}');") 
+              i(class="fa fa-check-square-o")
+              |  Save

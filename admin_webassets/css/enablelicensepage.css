@@ -1,0 +1,125 @@
+#bodydiv {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: #000000;
+    background-color: #ddd;
+    overflow: hidden;
+    position: fixed;
+}
+
+#bodytable {
+    width: 1%;
+    white-space: nowrap;
+    margin: 0 auto;    
+    text-align: center;
+}
+
+#bodytable #settingblock {
+    text-align: center;
+    background-color: #ffffff;
+}
+
+
+
+#bodytable #bodytablecaption {
+    text-align: left;
+    font-family: "Verdana";
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #5cb85c;
+    color: #ffffff;
+    width: 100%;
+    padding: 0.4em;
+}
+
+#bodytable #bodytablecaption-error {
+    text-align: left;
+    font-family: "Verdana";
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #ff9800;
+    color: #ffffff;
+    width: 100%;
+    padding: 0.4em;
+}
+
+
+#bodytable #bodytablestepword {
+    text-align: center;
+    font-family: "Verdana";
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #d2be0e;
+    color: #ffffff;
+    width: 1%;
+    white-space: nowrap;
+    padding: 0.4em;    
+}
+
+#bodytable #bodytablestepword-error {
+    text-align: center;
+    font-family: "Verdana";
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #e91e63;
+    color: #ffffff;
+    width: 1%;
+    white-space: nowrap;
+    padding: 0.4em;    
+}
+
+#bodytable #nextbutton {
+    text-align: right;
+    font-family: "Verdana";
+    font-size: 1.2em;
+    font-weight: bold;
+    width: 100%;
+    white-space: nowrap;
+    padding-top: 0.4em;  
+    padding-bottom: 0.4em;      
+    padding-right: 0.2em;
+}
+
+#settingblockdiv {
+    width: 1%;
+    white-space: nowrap;   
+    padding: 2em;
+}
+
+#licensetable {
+    width: 100%;
+    border: none;
+}
+
+#licensetable #keys {
+    width: 1%;
+    white-space: nowrap;
+    text-align: right;
+    background-color: #ddd;
+    padding: 0.4em;
+}
+
+#licensetable #keys-error {
+    width: 1%;
+    white-space: nowrap;
+    text-align: right;
+    background-color: #ff9800;
+    border: 1px #ff5722 solid;
+    padding: 0.4em;
+}
+
+#licensetable #values-error {
+    width: 100%;
+    white-space: nowrap;
+    background-color: #ff9800;
+    border: 1px #ff5722 solid;    
+    padding: 0.4em;    
+}
+
+#licensetable #values {
+    width: 100%;
+    white-space: nowrap;
+    background-color: #eeeeee;
+    padding: 0.4em;    
+}

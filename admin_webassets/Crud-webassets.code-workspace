@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+
+		"triggerTaskOnSave.tasks": {
+			"sync to dev1": [
+				"*.*",
+			]
+		}
+
+	}
+}

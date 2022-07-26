@@ -1,0 +1,94 @@
+if roles.netondoadmin
+    li.nav-item
+      p
+        span.menu-title(data-i18n='') &nbsp;    
+    li.nav-item
+      a(href='#')
+        i.fa.fa-cube
+        span.menu-title(data-i18n='') Platform management
+      ul.menu-content
+        li
+          a.menu-item(href='/engine?module=accounts&action=gotoMainPageOrSigninAgain&default_object_to_load=domains', onClick="loadContainerQuery('crud','read','#netondocontentbody','&obj=domains'); return false") Domains
+        li
+          a.menu-item(href='/engine?module=accounts&action=gotoMainPageOrSigninAgain&default_object_to_load=rolelist', onClick="loadContainerQuery('crud','read','#netondocontentbody','&obj=rolelist'); return false") Role list
+    li.nav-item
+      a(href='#')
+        i.fa.fa-cog
+        span.menu-title(data-i18n='') Logic development
+      ul.menu-content                     
+        li
+          a.menu-item(href='/engine?module=accounts&action=gotoMainPageOrSigninAgain&default_module_to_load=objects&default_action_to_load=read', onClick="loadContainerQuery('objects','read','#netondocontentbody',''); return false") Objects
+        li
+          a.menu-item(href='/engine?module=accounts&action=gotoMainPageOrSigninAgain&default_module_to_load=functions&default_action_to_load=read', onClick="loadContainerQuery('functions','read','#netondocontentbody',''); return false") API Functions
+        li
+          a.menu-item(href='/engine?module=accounts&action=gotoMainPageOrSigninAgain&default_module_to_load=scripts&default_action_to_load=read', onClick="loadContainerQuery('scripts','read','#netondocontentbody',''); return false") Scripts 
+        li
+          a.menu-item(href='/engine?module=accounts&action=gotoMainPageOrSigninAgain&default_module_to_load=maintanance&default_action_to_load=read', onClick="loadContainerQuery('maintanance','showlogs','#netondocontentbody',''); return false") Logs
+
+    li.nav-item
+      a(href='#')
+        i.fa.fa-th-large
+        span.menu-title(data-i18n='') Views development
+      ul.menu-content
+        li
+          a.menu-item(href='/engine?module=accounts&action=gotoMainPageOrSigninAgain&default_module_to_load=admin_views&default_action_to_load=read', onClick="loadContainerQuery('admin_views','read','#netondocontentbody',''); return false") Admin views
+        li
+          a.menu-item(href='/engine?module=accounts&action=gotoMainPageOrSigninAgain&default_module_to_load=custom_views&default_action_to_load=read', onClick="loadContainerQuery('custom_views','read','#netondocontentbody',''); return false") Custom views         
+
+
+    li.nav-item
+      a(href='#')
+        i.fa.fa-list-alt
+        span.menu-title(data-i18n='') Assets management
+      ul.menu-content
+        li
+          a.menu-item(href='/engine?module=accounts&action=gotoMainPageOrSigninAgain&default_module_to_load=admin_web_assets&default_action_to_load=read', onClick="loadContainerQuery('admin_web_assets','read','#netondocontentbody',''); return false") Admin web Assets       
+        li
+          a.menu-item(href='/engine?module=accounts&action=gotoMainPageOrSigninAgain&default_module_to_load=custom_web_assets&default_action_to_load=read', onClick="loadContainerQuery('custom_web_assets','read','#netondocontentbody',''); return false") Custom web Assets          
+                   
+
+    li.nav-item
+      a(href='#')
+        i.fa.fa-database
+        span.menu-title(data-i18n='') DB tool 
+      ul.menu-content
+        li
+          a.menu-item(href='/engine?module=accounts&action=gotoMainPageOrSigninAgain&default_module_to_load=dbstored&default_action_to_load=read', onClick="loadContainerQuery('dbstored','read','#netondocontentbody',''); return false") DB Stored           
+    li.nav-item
+      a(href='#')
+        i.fa.fa-list-ul
+        span.menu-title(data-i18n='') Menu control
+      ul.menu-content
+        li
+          a.menu-item(href='/engine?module=accounts&action=gotoMainPageOrSigninAgain&default_object_to_load=menu_categories', onClick="loadContainerQuery('crud','read','#netondocontentbody','&obj=menu_categories'); return false") Menu categories
+        li
+          a.menu-item(href='/engine?module=accounts&action=gotoMainPageOrSigninAgain&default_object_to_load=menu_items', onClick="loadContainerQuery('crud','read','#netondocontentbody','&obj=menu_items'); return false") Menu items
+
+ if roles.netondoadmin || roles.usermgr         
+    li.nav-item
+      a(href='#')
+        i.fa.fa-user
+        span.menu-title(data-i18n='') Users & roles
+      ul.menu-content         
+        li
+          a.menu-item(href='/engine?module=accounts&action=gotoMainPageOrSigninAgain&default_object_to_load=rolesets', onClick="loadContainerQuery('crud','read','#netondocontentbody','obj=rolesets'); return false") Rolesets
+        li
+          a.menu-item(href='/engine?module=accounts&action=gotoMainPageOrSigninAgain&default_object_to_load=groups', onClick="loadContainerQuery('crud','read','#netondocontentbody','&obj=groups'); return false") Groups 
+        li
+          a.menu-item(href='/engine?module=accounts&action=gotoMainPageOrSigninAgain&default_object_to_load=users', onClick="loadContainerQuery('crud','read','#netondocontentbody','obj=users'); return false") Users 
+
+    li.nav-item
+      a(href='#')
+        i.fa.fa-book
+        span.menu-title(data-i18n='') Core dictionaries
+      ul.menu-content         
+        li
+          a.menu-item(href='/engine?module=accounts&action=gotoMainPageOrSigninAgain&default_object_to_load=countries', onClick="loadContainerQuery('crud','read','#netondocontentbody','obj=countries'); return false") Countries
+        li
+          a.menu-item(href='/engine?module=accounts&action=gotoMainPageOrSigninAgain&default_object_to_load=cities', onClick="loadContainerQuery('crud','read','#netondocontentbody','&obj=cities'); return false") Cities 
+  li.nav-item
+    p
+      span.menu-title(data-i18n='') &nbsp;        
+  li.nav-item
+    p
+      span.menu-title(data-i18n='') &nbsp; 

@@ -1,0 +1,10 @@
+mixin menuItem(label, link)
+    ul.menu-content
+        li
+            a.menu-item(onClick="loadContainerQuery('crud','read','#netondocontentbody','#{link}');") #{label}
+
+mixin menuCategory(label,icon)
+        a(href='#')
+          i.fa.fa-glass
+          span.menu-title(data-i18n='') #{label}
+        

@@ -1,0 +1,40 @@
+.table-responsive#tablediv
+    table#datatable_list.table.table-bordered
+        thead.bg-primary.bg-lighten-4
+            tr
+                th
+                each column, k in headers
+                        th !{column}
+
+        tfoot
+            tr
+                th
+                each column, k in headers
+                        th !{column}                               
+        tbody
+            - var rownum = 1
+            if data
+            
+                each row, i in data
+                    tr
+                        each column, k in row
+                            td
+                                if k == 0
+                                    !{rownum}
+                                else
+                                    if column.buttons
+                                            each button in column.buttons
+                                                if button.askconfirm
+                                                    - var url = 'executeModalQueryConfirm("' + button.url  + '","' + button.name + '","' + button.container + '","' + doafter +  '")'
+                                                else
+                                                    - var url = 'executeModalQuery("' + button.url  + '","' + button.name + '","' + button.container + '")'
+                                                +Button(url,button.name,button.color,'fa fa-pencil')
+                                    else
+                                        !{column}
+                    - rownum = rownum + 1
+    script.
+        $('#datatable_list').DataTable({
+            "pageLength" : #{pageLength}
+        });
+
+

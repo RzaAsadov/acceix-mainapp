@@ -1,0 +1,33 @@
+include ../components/InputElements.jade
+.row
+  .col-xs-12
+    .card
+      if result == "error"
+        .card-header
+          h4.card-title #{message}
+      else 
+        .card-header
+          h4.card-title #{pagetitle}
+          a.heading-elements-toggle
+            i.fa.fa-ellipsis-v.font-medium-3
+
+        .card-body.collapse.in
+              .row
+                .col-md-6
+                  if creatable
+                    - var url = "executeModalQuery('module=crud&action=getcreatemodel&obj=" + cur_obj + "','Create','modal-lg')"
+                    +Button(url,"CREATE","green","fa fa-plus")
+                .col-md-6.text-md-right
+                  if filterFields
+                    - var url = "executeModalQuery('module=crud&action=getfiltermodel&obj=" + cur_obj + "','Get filtered results','modal-md')"
+                    +Button(url,"Add filters","info","fa fa-filter")
+              if filters
+                .row
+                  .col-md-12.text-md-right
+                      each row, i in filters
+                          .btn.btn-sm.btn-secondary.round.mr-1 #{row.value} 
+                            .tag.tag-warning.tag-pill.round #{row.name} 
+          .card-block.card-dashboard
+
+            if containstable
+              include ../components/table.jade

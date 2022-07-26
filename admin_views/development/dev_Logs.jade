@@ -1,0 +1,17 @@
+include ../components/InputElements.jade
+.row
+  .col-xs-12
+    .card
+      .card-header
+        h4.card-title #{title}
+        a.heading-elements-toggle
+          i.fa.fa-ellipsis-v.font-medium-3
+        .heading-elements
+
+      .card-body.collapse.in
+            .card-block.card-dashboard
+              //.alert.alert-success
+                |   #{message}
+
+              include dev_Table.jade
+

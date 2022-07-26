@@ -1,0 +1,99 @@
+#mainmenu {
+    width: 100%;
+    background-color: #ffffff;
+    border: none;
+    border-collapse: collapse;
+    font-family: "Verdana";
+    font-weight: bold;
+    font-size: 0.9em;
+} 
+
+.reset-black {
+    color: activecaption;
+    background-color: activecaption;
+}
+
+#mainmenu #btn_reset {
+    background-color: #f1f1f1;
+    text-align: center;  
+    padding-top: 0.3em;   
+    padding-bottom: 0.3em;          
+    padding-right: 0.6em;
+    width: 1%;
+    white-space: nowrap;
+}
+
+#mainmenu #btn_online {
+    text-align: center;  
+    padding-top: 0.3em;   
+    padding-bottom: 0.3em;          
+    width: 1%;
+    white-space: nowrap;
+}
+
+#mainmenu #btn_agents {
+    text-align: center;  
+    padding-top: 0.3em;   
+    padding-left: 0.6em;     
+    padding-bottom: 0.3em;          
+    width: 1%;
+    white-space: nowrap;
+}
+
+#mainmenu #btn_usermgr {
+    text-align: center; 
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;          
+    padding-left: 0.6em;    
+    width: 1%;
+    white-space: nowrap;    
+}
+
+#mainmenu #btn_reports {
+    text-align: center;   
+    padding-top: 0.3em;    
+    padding-bottom: 0.3em;      
+    padding-left: 0.6em;        
+    width: 1%;
+    white-space: nowrap;    
+}
+
+#mainmenu #btn_patterns {
+    text-align: center;   
+    padding-top: 0.3em;    
+    padding-bottom: 0.3em;      
+    padding-left: 0.6em;        
+    width: 1%;
+    white-space: nowrap;    
+}
+
+#mainmenu #btn_space {
+    text-align: center;
+    width: 100%;
+}
+
+#mainmenu #btn_addagent {
+    text-align: center; 
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;          
+    padding-left: 0.6em;    
+    padding-right: 0.9em;
+    width: 1%;
+    white-space: nowrap;    
+}
+
+
+.menubtn {
+    
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    /*padding: 6px 12px;*/
+    /*border: 1px solid #ccc;*/
+    border-top: none;
+    height: 100%;
+    width: 100%;
+}
+

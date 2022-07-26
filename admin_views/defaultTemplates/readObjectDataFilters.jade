@@ -1,0 +1,58 @@
+include ../components/InputElements.jade
+
+style(type='text/css').
+        .selectpicker {
+                font-size: 15px !important;
+        }
+.container#createbody
+                    form(id="dataform", name="dataform").form
+                        if fields
+                                each row, i in fields
+                                        fieldset.form-group.floating-label-form-group
+                                            if row.datatype == "string"
+                                                    +inputText(row.displayname,row.name)                                                    
+                                            if row.datatype == "text"
+                                                    +inputText(row.displayname,row.name)                                                    
+                                            if row.datatype == "integer"                                
+                                                    +inputText(row.displayname,row.name)
+                                            if row.datatype == "long"                                
+                                                    +inputText(row.displayname,row.name)     
+                                            if row.datatype == "float"                                
+                                                    +inputText(row.displayname,row.name)                                                                                                   
+                                            if row.datatype == "double"                                
+                                                    +inputText(row.displayname,row.name)                                                    
+                                            if row.datatype == "datetime"                                
+                                                    +inputDateTime(row.displayname,row.name)
+                                            if row.datatype == "boolean"                                
+                                                    +inputCheckbox(row.displayname,row.name)                                                    
+                                            if row.datatype == "date"
+                                                    +inputDate(row.displayname,row.name)                                            
+                                            if row.datatype == "time"
+                                                    +inputTime(row.displayname,row.name)                                            
+                                            if row.datatype == "enum"
+                                                    +inputSelectEnum(row.displayname,row.name,row.values)
+                                            if row.datatype == "external"
+                                                    +inputSelect(row.displayname,row.name,row.values)                                            
+
+                    button.btn.btn-warning.btn-lg.btn-block(type='button', onClick='filterObject("crud","read","#netondocontentbody","#{cur_obj}");')
+                        i.fa.fa-filter
+                        |   Get filtered results
+        
+script.
+
+    $('.selectpicker').selectpicker({
+        
+    });
+
+    $('.dates').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minYear: 1901,
+        maxYear: parseInt(moment().format('YYYY'),10),
+        buttonClasses: "btn btn-md",
+        locale: {
+                        format: 'DD/MM/YYYY'
+                }        
+    });    
+
+       

@@ -1,0 +1,223 @@
+.agentstable {
+    width: 100%;
+}
+
+.agentstable th {
+    text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;  
+    background-color: #4CAF50;
+    color: white;  
+    font-family: "Verdana";
+    font-size: 0.8em;
+    cursor: pointer;
+}
+
+.agentstable .owneruser {
+    text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;    
+    font-family: "Verdana";
+    font-size: 0.8em;   
+    width: 1%;
+    white-space: nowrap;
+}
+
+.agentstable .ownergroup {
+    text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;    
+    font-family: "Verdana";
+    font-size: 0.8em;   
+    width: 1%;
+    white-space: nowrap;
+}
+
+.agentstable .uid {
+    text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-family: "Verdana";
+    font-size: 0.8em;   
+    color: #0033cc;
+    width: 1%;
+    white-space: nowrap;
+}
+
+
+.agentstable .ip {
+    text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-family: "Verdana";
+    font-size: 0.8em;   
+    width: 1%;
+    white-space: nowrap;
+}
+
+.agentstable .desc {
+    text-align: left;
+    padding-left: 1em;
+    font-family: "Verdana";
+    font-size: 0.8em;   
+    width: 100%;
+}
+
+
+.agentstable .status {
+    text-align: center;
+    padding-right: 1em;
+    padding-left: 1em;
+    font-family: "Verdana";
+    font-size: 0.8em;
+    font-weight: bold;
+    width: 1%;
+    white-space: nowrap;
+}
+
+
+.agentstable .operations {
+    text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-family: "Verdana";
+    font-size: 0.8em; 
+    width: 1%;
+    white-space: nowrap;
+}
+
+
+
+.userstable {
+    width: 100%;
+    border-color: #ffffff;
+}
+
+.userstable th {
+    text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    background-color: #4CAF50;
+    color: white;  
+    font-family: "Verdana";
+    font-size: 0.8em;
+   
+}
+
+.userstable .owneruser {
+    text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;    
+    font-family: "Verdana";
+    font-size: 0.8em;   
+    width: 1%;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.userstable .ownergroup {
+    text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;    
+    font-family: "Verdana";
+    font-size: 0.8em;   
+    width: 1%;
+    white-space: nowrap;
+    cursor: pointer;    
+}
+
+.userstable .user {
+    text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-family: "Verdana";
+    font-size: 0.8em;   
+    font-weight: bold;
+    width: 1%;
+    white-space: nowrap;
+    cursor: pointer;        
+}
+
+.userstable .desc {
+    text-align: left;
+    padding-left: 1em;
+    font-family: "Verdana";
+    font-size: 0.8em;   
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;    
+}
+
+
+
+.userstable .status {
+    text-align: center;
+    padding-right: 1em;
+    padding-left: 1em;
+    font-family: "Verdana";
+    font-size: 0.8em;
+    font-weight: bold;
+    width: 1%;
+    white-space: nowrap;
+    cursor: pointer;    
+}
+
+.userstable .offline {
+    color: #ccc;
+}
+
+.userstable .online {
+    color: #009900;
+}
+
+.userstable .pending {
+    color: #64c8ef;
+}
+
+
+.userstable .operations {
+    text-align: center;
+    font-family: "Verdana";
+    font-size: 0.8em;   
+    cursor: pointer;
+}
+
+.userstable .settings {
+    text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-family: "Verdana";
+    font-size: 0.8em; 
+    width: 1%;
+    white-space: nowrap;
+}
+
+.userstable .subplaybox {
+    text-align: center;
+    font-family: "Verdana";
+    font-size: 0.7em;
+    color: #FFFFFF;    
+}
+
+
+.userstable .subplaylink {
+    background-color: #64c8ef;
+    color: white;
+    padding: 0.4em;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block; 
+}
+
+
+.operationtable {
+    width: 100%;
+    text-align: center;
+}
+
+.operationtable td {
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+}
+

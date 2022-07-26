@@ -1,0 +1,48 @@
+form(id="listobjectdataform", name="listobjectdataform").form
+                if fields
+                        - var cur_pos = 0;
+                        each input, i in fields
+                                - var step_count = i / 3
+                                - var start_point = step_count * 3
+                                - var stop_point = (step_count + 1) * 3
+                                - var row = input
+                                - var cur_pos = cur_pos + 1
+                                if (i == start_point)
+                                                - var row1 = fields[i]
+                                                - var row2 = fields[i+1]
+                                                - var row3 = fields[i+2]
+                                                .row
+                                                        .col-md-4.form-group.floating-label-form-group
+                                                                +Input(row1)
+                                                        .col-md-4.form-group.floating-label-form-group
+                                                                +Input(row2)
+                                                        .col-md-4.form-group.floating-label-form-group
+                                                                +Input(row3)                                                                                                                                
+                                                - var start_point = 10000
+                                                                                           
+                        .row
+                                .col-md-4
+                                        button.btn.btn-success.btn-md.btn-block(type='button', onClick='updateListObject("#{submit_to_module}","#{submit_to_action}","#{cur_obj}","Update list","#{doafter}");')
+                                                i.fa.fa-check-circle
+                                                |   Add
+                                .col-md-8
+
+                      
+        
+script.
+
+    $('.selectpicker').selectpicker({
+        
+    });
+
+       
+    $('.dates').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minYear: 1901,
+        maxYear: parseInt(moment().format('YYYY'),10),
+        buttonClasses: "btn btn-md",
+        locale: {
+                        format: 'DD/MM/YYYY'
+                }        
+    }); 
