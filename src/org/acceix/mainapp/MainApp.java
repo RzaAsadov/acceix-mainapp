@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2022 Rza Asadov (rza dot asadov at gmail dot com).
+ * Copyright 2022 Rza Asadov (rza at asadov dot me).
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@ package org.acceix.mainapp;
 
 
 
-
+ 
 import org.acceix.frontend.crud.loaders.CustomAssetsLoader;
 import org.acceix.frontend.crud.loaders.CustomViewsLoader;
 import org.acceix.frontend.crud.loaders.DbStoredLoader;
@@ -37,12 +37,11 @@ import org.acceix.frontend.crud.loaders.ScriptLoader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.file.Paths;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -52,26 +51,33 @@ import java.util.logging.Logger;
 import org.acceix.frontend.builtin.dbstored.BuildInDbStoredLoader;
 import org.acceix.frontend.builtin.functions.BuiltInFunctionsLoader;
 import org.acceix.frontend.builtin.objects.BuiltInObjectsLoader;
-import org.acceix.frontend.core.accounts.AuthManager;
+import org.acceix.frontend.core.accounts.Accounts;
 import org.acceix.frontend.core.NetondoMaintanance;
+import org.acceix.frontend.core.accounts.Setup;
 import org.acceix.frontend.crud.CoreModule;
 import org.acceix.frontend.crud.ViewModule;
 import org.acceix.frontend.crud.loaders.AdminAssetsLoader;
 import org.acceix.frontend.crud.loaders.AdminViewsLoader;
+import org.acceix.frontend.crud.loaders.DbEventsLoader;
+import org.acceix.frontend.crud.loaders.DbTablesLoader;
+import org.acceix.frontend.crud.loaders.DbTriggersLoader;
+import org.acceix.frontend.crud.loaders.DbViewsLoader;
 import org.acceix.frontend.crud.loaders.FunctionLoader;
 import org.acceix.frontend.files.UploadManager;
 import org.acceix.frontend.location.LocationManager;
-import org.acceix.ndatabaseclient.DataConnector;
-import org.acceix.ide.modules.NCodeAdminAssets;
-import org.acceix.ide.modules.NCodeDbStored;
-import org.acceix.ide.modules.NCodeFunctions;
-import org.acceix.ide.modules.NCodeObjects;
-import org.acceix.ide.modules.NCodeScripts;
-import org.acceix.ide.modules.NCodeAdminViews;
-import org.acceix.ide.modules.NCodeCustomViews;
-import org.acceix.ide.modules.NCodeCustomAssets;
-import org.ini4j.Ini;
-import org.ini4j.Profile.Section;
+import org.acceix.ide.modules.adminassets.NCodeAdminAssets;
+import org.acceix.ide.modules.dbstored.NCodeDbStored;
+import org.acceix.ide.modules.apifunctions.NCodeFunctions;
+import org.acceix.ide.modules.objects.NCodeObjects;
+import org.acceix.ide.modules.scripts.NCodeScripts;
+import org.acceix.ide.modules.adminviews.NCodeAdminViews;
+import org.acceix.ide.modules.customviews.NCodeCustomViews;
+import org.acceix.ide.modules.customassets.NCodeCustomAssets;
+import org.acceix.ide.modules.dbevents.NCodeDbEvents;
+import org.acceix.ide.modules.tables.NCodeDbTables;
+import org.acceix.ide.modules.dbtriggers.NCodeDbTriggers;
+import org.acceix.ide.modules.dbviews.NCodeDbViews;
+import org.acceix.ndatabaseclient.mysql.DbMetaData;
 
 /**
  *
@@ -81,11 +87,29 @@ public class MainApp {
 
     private static String JRE_PATH = "";
     private static String INSTALL_PATH = "";
+    private static String APP_NAME = "";
     private static String CONFIG_FILE_PATH = "";
-
+    private static String APP_PATH = "";
     private static String LOGDIR_PATH = "";
+    
+    
+    private final static int APP_CREATE_MODE = 1;
+    private final static int APP_START_MODE = 2;
+    private final static int START_ALL_APPS = 3;
+    
+    
+    private static int  currentStartMode = 0;
 
     private static final Map<String, Object> ENVS = new HashMap<>();
+
+    public static int getCurrentStartMode() {
+        return currentStartMode;
+    }
+
+    public static void setCurrentStartMode(int currentStartMode) {
+        MainApp.currentStartMode = currentStartMode;
+    }
+        
 
     public static String getJRE_PATH() {
         return JRE_PATH;
@@ -106,81 +130,149 @@ public class MainApp {
     public static Map<String, Object> getENVS() {
         return ENVS;
     }
+
+    public static void setAPP_PATH(String APP_PATH) {
+        MainApp.APP_PATH = APP_PATH;
+    }
+
+    public static String getAPP_PATH() {
+        return APP_PATH;
+    }
+
+    public static String getAPP_NAME() {
+        return APP_NAME;
+    }
+
+    public static void setAPP_NAME(String APP_NAME) {
+        MainApp.APP_NAME = APP_NAME;
+    }
+    
+    
+
+    public static void setCONFIG_FILE_PATH(String CONFIG_FILE_PATH) {
+        MainApp.CONFIG_FILE_PATH = CONFIG_FILE_PATH;
+    }
+
+    public static String getCONFIG_FILE_PATH() {
+        return CONFIG_FILE_PATH;
+    }
+    
+    
     
     
 
     public static void main(String[] args) throws FileNotFoundException {
+        
+        
+        if (System.getProperty("user.name").equals("root")) {
+            System.err.println("Running under root prohibited ! Please use another user !");
+            System.exit(0);
+        }        
 
         try {
             
             LinkedHashMap arguments = ArgumentParser.parseArguments(args);
-            CONFIG_FILE_PATH = (String)arguments.get("CONFIG_FILE_PATH");
+            setCONFIG_FILE_PATH((String)arguments.get("CONFIG_FILE_PATH"));
+            setAPP_NAME((String)arguments.get("APP_NAME"));            
             
-        } catch (ParseException | org.apache.commons.cli.ParseException ex) {
+        } catch (ParseException | org.apache.commons.cli.ParseException  ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        System.out.println("Starting main app........");
-
-        setPaths();
-
-        if (!readConfig()) {
-            System.exit(0); // Exit if troubles with reading  config file;
-        }
-
-        if (System.getProperty("user.name").equals("root")) {
-            System.err.println("Running under root prohibited ! Please use another user !");
             System.exit(0);
         }
+        
+
+            
+            setPaths();
+            
+            
+            ////////////////////////////////////////////////////////////////////////
+            ////////////////// APP CREATE MODE /////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////
+            if (getAPP_NAME() != null && getCONFIG_FILE_PATH() == null) {
+                
+                    setCurrentStartMode(MainApp.APP_CREATE_MODE);
+
+                    ENVS.put("isAppCreateMode", true); 
+
+                    ConfigSetup.createAppDirectories(getINSTALL_PATH(),getAPP_NAME());
+
+                    ConfigSetup.createConfig(getCONFIG_FILE_PATH(), getINSTALL_PATH(), getENVS());
+                    
+                    
+            ////////////////////////////////////////////////////////////////////////
+            ////////////////// APP START MODE /////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////                
+            } else if (getAPP_NAME() == null && getCONFIG_FILE_PATH() != null) {
+                
+                    setCurrentStartMode(MainApp.APP_START_MODE);
+
+                    ENVS.put("isAppCreateMode", false); 
 
 
-        // Start web server
 
+                    if (!ConfigSetup.readConfig(getCONFIG_FILE_PATH(),getENVS()) ) {
+                        System.out.println("Config file '" + getCONFIG_FILE_PATH() + "' unreadable !");
+                        System.exit(0); // Exit if troubles with reading  config file;
+                    }                
 
-            if ((ENVS.get("database_ssh_user") != null) 
-                    && (ENVS.get("database_ssh_host") != null)) {
-                  connecToVpn();
+                    loadAppAssets();
+                
+            ////////////////////////////////////////////////////////////////////////
+            ////////////////// START ALL APPS MODE /////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////                
+            } else if (getAPP_NAME() == null && getCONFIG_FILE_PATH() == null) {
+                
+                    setCurrentStartMode(MainApp.START_ALL_APPS);
+
+                    ENVS.put("isAppCreateMode", false); 
+                
+            ////////////////////////////////////////////////////////////////////////
+            //////////////// Exit because wrong arguments //////////////////////////
+            ////////////////////////////////////////////////////////////////////////                
+            } else if (getAPP_NAME() != null && getCONFIG_FILE_PATH() != null) {
+                System.out.println("Create mode and start mode can not be used in same time !");
+                System.exit(0);
             }
-
-
-            FunctionLoader.setGlobalEnvs(ENVS);
-            ObjectLoader.setGlobalEnvs(ENVS);
-            DbStoredLoader.setGlobalEnvs(ENVS);
             
-            new BuiltInObjectsLoader().loadObjects(); // Load builtin objects
-            new BuiltInFunctionsLoader().loadFunctions(); // Load builtin functions
-            new BuildInDbStoredLoader().loadDbStored(); // Load builtin db stored            
-            
-            new FunctionLoader().loadAll(ENVS.get("functions_path").toString());
-            
-            
-            new ObjectLoader().loadAll(ENVS.get("objects_path").toString());
-            
-
-            new DbStoredLoader().loadAll(ENVS.get("dbstored_path").toString());
-            
-            new ScriptLoader().loadAll(ENVS.get("scripts_path").toString());
-            new AdminViewsLoader().loadAll(ENVS.get("admin_views_path").toString());
-            new CustomViewsLoader().loadAll(ENVS.get("custom_views_path").toString());
-            new CustomAssetsLoader().loadAll(ENVS.get("custom_web_assets_path").toString());
-            new AdminAssetsLoader().loadAll(ENVS.get("admin_web_assets_path").toString());
-            
+           
             
 
         
+        if ((ENVS.get("database_ssh_user") != null) 
+                && (ENVS.get("database_ssh_host") != null)) {
+              connecToVpn();
+        }
 
+
+        
+        // Static data set
+        DbMetaData.setColumnTypes();
+        DbMetaData.setColumnLength();
+
+        
+        // Start web server
         WebService mainWebService = new WebService(ENVS);
         
-        mainWebService.addNetondoModule(new AuthManager());
+        
+        mainWebService.addNetondoModule(new Setup());
+        mainWebService.addNetondoModule(new Accounts());
 
         mainWebService.addNetondoModule(new NetondoMaintanance());
         
         mainWebService.addNetondoModule(new NCodeObjects());
         mainWebService.addNetondoModule(new NCodeFunctions());
+        
         mainWebService.addNetondoModule(new NCodeDbStored());
+        mainWebService.addNetondoModule(new NCodeDbTriggers());
+        mainWebService.addNetondoModule(new NCodeDbViews());
+        mainWebService.addNetondoModule(new NCodeDbEvents());
+        mainWebService.addNetondoModule(new NCodeDbTables());
+        
         mainWebService.addNetondoModule(new NCodeScripts());
+        
         mainWebService.addNetondoModule(new NCodeAdminViews());
-        mainWebService.addNetondoModule(new NCodeCustomViews()); 
+        mainWebService.addNetondoModule(new NCodeCustomViews());
+        
         mainWebService.addNetondoModule(new NCodeCustomAssets()); 
         mainWebService.addNetondoModule(new NCodeAdminAssets()); 
         
@@ -201,152 +293,11 @@ public class MainApp {
         }
         
 
-        
-        /*try {
-            String actual = Files.readString(Path.of("/home/zrid/sample.json"));
-            
-            new DataUtils().readJsonObjectFromString(actual);
-            
-        } catch (IOException ex) {
-            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (org.json.simple.parser.ParseException ex) {
-            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+
 
     }
 
-
-
-    public static boolean readConfig()  {
-
-        try {
-            File confFile = new File(CONFIG_FILE_PATH);
-            if (!confFile.exists()) {
-                System.out.println("ERROR: Could't find config file on path " + CONFIG_FILE_PATH + ", exiting.....");
-                return false;
-            } else {
-
-                Ini iniConfHandler = new Ini(confFile);
-
-                Section section = iniConfHandler.get("mainsettings");
-                section.keySet().forEach((optionKey) -> {
-                    
-                    
-                    
-                    String value = section.get(optionKey);
-                    
-                    if (optionKey.endsWith("_path")) {
-                        if(value.endsWith("/")) {
-                              value = value.substring(0,value.length() - 1);
-                        }
-                    }
-                    
-                    if (value.contains("%home_path%")) {
-                        value = value.replaceAll("%home_path%", section.get("home_path"));
-                    }
-                    
-                    if (value.contains("%app%")) {
-                        value = value.replaceAll("%app%", section.get("app"));
-                    }                    
-
-                    ENVS.put(optionKey, value);
-                });
-                
-                if (ENVS.get("apps_folder_name")==null) ENVS.put("apps_folder_name", "apps");
-                
-                if (ENVS.get("admin_domain")==null) ENVS.put("admin_domain", "admindomain");
-                if (ENVS.get("env_mode")==null) ENVS.put("env_mode", "DEBUG");
-                if (ENVS.get("reverse_proxy_use")==null) ENVS.put("reverse_proxy_use", "yes");
-                if (ENVS.get("reverse_proxy_ip_header")==null) ENVS.put("reverse_proxy_ip_header", "X-FORWARDED-FOR");
-
-                if (ENVS.get("admin_views_path")==null) ENVS.put("admin_views_path",  ENVS.get("home_path") + "/" + "admin_views");
-                if (ENVS.get("admin_web_assets_path")==null) ENVS.put("admin_web_assets_path", ENVS.get("home_path") + "/" + "admin_webassets");
-                if (ENVS.get("custom_views_path")==null) ENVS.put("custom_views_path", ENVS.get("home_path") + "/" + ENVS.get("apps_folder_name") + "/" + ENVS.get("app") + "/views");                
-                if (ENVS.get("custom_web_assets_path")==null) ENVS.put("custom_web_assets_path", ENVS.get("home_path") + "/" + ENVS.get("apps_folder_name") + "/" + ENVS.get("app") + "/webassets");
-                
-                if (ENVS.get("objects_path")==null) ENVS.put("objects_path", ENVS.get("home_path") + "/" + ENVS.get("apps_folder_name") + "/" + ENVS.get("app") + "/" + "objects");
-                if (ENVS.get("dbstored_path")==null) ENVS.put("dbstored_path", ENVS.get("home_path") + "/" + ENVS.get("apps_folder_name") + "/" + ENVS.get("app") + "/" + "dbstored");
-                if (ENVS.get("functions_path")==null) ENVS.put("functions_path", ENVS.get("home_path") + "/" + ENVS.get("apps_folder_name") + "/" + ENVS.get("app") + "/" + "functions");
-                if (ENVS.get("upload_dir")==null) ENVS.put("upload_dir", ENVS.get("home_path") + "/" + ENVS.get("apps_folder_name") + "/" + ENVS.get("app") + "/" + "uploads");
-                if (ENVS.get("documents_path")==null) ENVS.put("documents_path", ENVS.get("home_path") + "/" + ENVS.get("apps_folder_name") + "/" + ENVS.get("app") + "/" + "uploads");
-                if (ENVS.get("upload_dir_tmp")==null) ENVS.put("upload_dir_tmp", ENVS.get("home_path") + "/" + ENVS.get("apps_folder_name") + "/" + ENVS.get("app") + "/" + "upload_tmp");
-                if (ENVS.get("scripts_path")==null) ENVS.put("scripts_path", ENVS.get("home_path") + "/" + ENVS.get("apps_folder_name") + "/" + ENVS.get("app") + "/" + "scripts");
-                
-                
-                if (ENVS.get("max_form_content_size")==null) ENVS.put("max_form_content_size", "10000000");
-                if (ENVS.get("max_upload_size")==null) ENVS.put("max_upload_size", "100000000");
-                if (ENVS.get("max_form_content_size")==null) ENVS.put("max_form_content_size", "100000000");
-                if (ENVS.get("file_size_threshold")==null) ENVS.put("file_size_threshold", "65536");
-                
-                if (ENVS.get("index_file")==null) ENVS.put("index_file", "index.html");
-                if (ENVS.get("wrong_domain_view_file")==null) ENVS.put("wrong_domain_view_file", "/wrong_domain");
-                if (ENVS.get("context_path")==null) ENVS.put("context_path", "/");
-                if (ENVS.get("api_url")==null) ENVS.put("api_url", "/engine");
-
-                
-                
-                if (ENVS.get("license_file")==null) ENVS.put("license_file", ENVS.get("home_path") + "/" + ENVS.get("apps_folder_name") + "/" + ENVS.get("app") + "/configs/license.npt");
-                if (ENVS.get("ssl_keystore_path")==null) ENVS.put("ssl_keystore_path", ENVS.get("home_path") + "/" + ENVS.get("apps_folder_name") + "/" + ENVS.get("app") + "/configs/default_keystore.jks");
-                if (ENVS.get("ssl_keystore_password")==null) ENVS.put("ssl_keystore_password", "123456");
-                if (ENVS.get("ssl_keymanager_password")==null) ENVS.put("ssl_keymanager_password", "123456");
-                
-                
-                DataConnector dataConnector = new DataConnector(ENVS,"system");
-                
-                    
-                    try (PreparedStatement preparedStatement = dataConnector.getConnection().prepareStatement("delete from npt_settings")) {
-                        
-                        preparedStatement.executeUpdate();                        
-                            
- 
-                        
-                    } catch (ClassNotFoundException | SQLException ex) {
-                        Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
-                    }                 
-                
-                
-                ENVS.forEach((k,v) -> {
-                    
-                    if (k.equals("database_port")) return;
-                    if (k.equals("database_password")) return;
-                    if (k.equals("database_user")) return;
-                    if (k.equals("database_host")) return;
-                    if (k.equals("database_schema")) return;
-                    if (k.equals("ssl_keystore_password")) return;
-                    if (k.equals("ssl_keymanager_password")) return;
-                    if (k.equals("http_port")) return;
-                    if (k.equals("database_driver")) return;
-                    if (k.equals("admin_password")) return;
-                    if (k.equals("admin_user")) return;
-                    if (k.equals("admin_domain")) return;
-
-                    
-                            String create_sql_cmd = "insert into npt_settings (key_name,key_value) values (?,?)";
-                            
-                            try (PreparedStatement preparedStatement_for_create = dataConnector.getConnection().prepareStatement(create_sql_cmd)) { 
-                                preparedStatement_for_create.setString(1, k);
-                                preparedStatement_for_create.setString(2, (String)v);
-                                preparedStatement_for_create.executeUpdate();
-                            }  catch (ClassNotFoundException | SQLException ex) {
-                                Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
-                            }                       
-                    
-                });
-                
-
-                
-                return true;
-
-            }
-
-        } catch (IOException ex) {
-            System.out.println("ERROR: Unable to read config file, please fix it. Exiting.....");
-            return false;
-
-        }
-
-    }
-
+    
     private static void setPaths() {
 
         // Get install path from executed jar
@@ -382,6 +333,8 @@ public class MainApp {
 
     }
     
+
+    
     private static void connecToVpn() {
         
                 System.out.print("Trying to establish ssh tunnel to  database....");
@@ -408,5 +361,50 @@ public class MainApp {
                 System.out.println("......DONE");        
     }
     
+    
 
-}
+    
+
+    
+    private static void loadAppAssets() {
+        
+                FunctionLoader.setGlobalEnvs(getENVS());
+                ObjectLoader.setGlobalEnvs(getENVS());
+                DbStoredLoader.setGlobalEnvs(getENVS());
+                DbTriggersLoader.setGlobalEnvs(getENVS());
+                DbViewsLoader.setGlobalEnvs(getENVS());
+                DbEventsLoader.setGlobalEnvs(getENVS());
+
+                new BuiltInObjectsLoader().loadObjects(); // Load builtin objects
+                new BuiltInFunctionsLoader().loadFunctions(); // Load builtin functions
+                new BuildInDbStoredLoader().loadDbStored(); // Load builtin db stored            
+
+                new FunctionLoader().loadAll(getENVS().get("functions_path").toString());
+
+
+                new ObjectLoader().loadAll(getENVS().get("objects_path").toString());
+
+                new DbStoredLoader().loadAll(getENVS().get("dbstored_path").toString());
+                
+                new DbTriggersLoader().loadAll(getENVS().get("dbtriggers_path").toString());
+                
+                new DbViewsLoader().loadAll(getENVS().get("dbviews_path").toString());
+                
+                new DbEventsLoader().loadAll(getENVS().get("dbevents_path").toString());
+                
+                new DbTablesLoader().loadAll(getENVS().get("dbtables_path").toString()); 
+                
+                new ScriptLoader().loadAll(getENVS().get("scripts_path").toString());
+                
+                new CustomViewsLoader().loadAll(getENVS().get("custom_views_path").toString());
+                
+                new CustomAssetsLoader().loadAll(getENVS().get("custom_web_assets_path").toString()); 
+                
+                new AdminViewsLoader().loadAll(getENVS().get("admin_views_path").toString());
+            
+                new AdminAssetsLoader().loadAll(getENVS().get("admin_web_assets_path").toString());                
+                
+    }
+    
+  
+} // END OF CLASS

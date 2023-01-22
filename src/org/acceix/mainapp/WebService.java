@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2022 Rza Asadov (rza dot asadov at gmail dot com).
+ * Copyright 2022 Rza Asadov (rza at asadov dot me).
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -50,7 +50,7 @@ import org.eclipse.jetty.util.thread.QueuedThreadPool;
 
 /**
  *
- * @author Rza Asadov <rza.asadov at gmail.com>
+ * @author Rza Asadov <rza at asadov dot me>
  */
 public class WebService {
     
@@ -60,7 +60,7 @@ public class WebService {
 
         private final Map<String,Object> envs;
         
-        private static final List<ModuleHelper> modules = new ArrayList<>();
+        private  final List<ModuleHelper> modules = new ArrayList<>();
 
         public WebService(Map<String, Object> envs) {
             this.envs = envs;

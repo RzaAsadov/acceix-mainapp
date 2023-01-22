@@ -3,3 +3,5 @@ apps
 deployment
 scripts
 .DS_Store
+build.xml
+

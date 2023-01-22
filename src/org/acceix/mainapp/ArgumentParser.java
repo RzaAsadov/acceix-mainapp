@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2022 Rza Asadov (rza dot asadov at gmail dot com).
+ * Copyright 2022 Rza Asadov (rza at asadov dot me).
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -49,18 +49,29 @@ public class ArgumentParser {
                                     .desc("path to config file")
                                     .type(String.class)
                                     .build();
+        
+        Option appOption = Option.builder("a")
+                                    .longOpt("app")
+                                    .required(false)
+                                    .numberOfArgs(1)
+                                    .desc("app name")
+                                    .type(String.class)
+                                    .build();        
 
         Options options = new Options();
         options.addOption(configOption);
+        options.addOption(appOption);
 
         CommandLineParser parser = new DefaultParser();
         CommandLine cmdLine = parser.parse(options, args, true);
 
         if (cmdLine.hasOption("c")) {
             returnValue.put("CONFIG_FILE_PATH", cmdLine.getParsedOptionValue("c").toString());
-        } else {
-
-        }
+        } 
+        
+        if (cmdLine.hasOption("a")) {
+            returnValue.put("APP_NAME", cmdLine.getParsedOptionValue("a").toString());
+        }         
         
         return returnValue;
 
